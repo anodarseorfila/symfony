@@ -1,0 +1,65 @@
+/* assets/styles/app.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #a65858;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px 0;
+}
+
+/* Navbar básica */
+.navbar {
+    background: #2c3e50;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.navbar a {
+    color: white;
+    margin-right: 15px;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.table {
+    background-color: red;
+}
+
+.table th,
+.table td {
+    padding: 60px 20px; /* Aumenta el espacio horizontal y vertical */
+    margin: 10px;
+    background-color: red;
+}
+
+.table th {
+    text-align: left; /* Alineación del texto (opcional) */
+}
