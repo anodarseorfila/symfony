@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -90,6 +92,44 @@ class Product
     public function setFechaCreacion(\DateTimeInterface $fecha_creacion): static
     {
         $this->fecha_creacion = $fecha_creacion;
+
+        return $this;
+    }
+
+    #[ORM\OneToMany(mappedBy: 'producto', targetEntity: PedidoProducto::class)]
+    private Collection $pedidoProductos;
+
+    public function __construct()
+    {
+        $this->pedidoProductos = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, PedidoProducto>
+     */
+    public function getPedidoProductos(): Collection
+    {
+        return $this->pedidoProductos;
+    }
+
+    public function addPedidoProducto(PedidoProducto $pedidoProducto): static
+    {
+        if (!$this->pedidoProductos->contains($pedidoProducto)) {
+            $this->pedidoProductos->add($pedidoProducto);
+            $pedidoProducto->setProducto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePedidoProducto(PedidoProducto $pedidoProducto): static
+    {
+        if ($this->pedidoProductos->removeElement($pedidoProducto)) {
+            // Set the owning side to null (unless already changed)
+            if ($pedidoProducto->getProducto() === $this) {
+                $pedidoProducto->setProducto(null);
+            }
+        }
 
         return $this;
     }

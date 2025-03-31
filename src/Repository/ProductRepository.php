@@ -16,6 +16,38 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+
+     public function getAllProducts(): array
+     {
+         return $this->createQueryBuilder('p')
+             ->orderBy('p.id', 'ASC')
+             ->getQuery()
+             ->getResult();
+     }
+
+     //Metodo para buscar un producto y devolverlo como arreglo
+     public function findProductAsArray(int $id): ?array
+     {
+        
+        $product = $this->find($id);
+
+        if(!$product) {
+            return null;
+        }
+
+        return [
+            'id' => $product->getId(),
+            'nombre' => $product->getNombre(),
+            'descripcion' => $product->getDescripcion(),
+            'precio' => $product->getPrecio(),
+            'stock' => $product->getStock(),
+            'fecha_creacion' => $product->getFechaCreacion()
+        ];
+     }
+
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */
